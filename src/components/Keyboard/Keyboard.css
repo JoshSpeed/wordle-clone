@@ -1,0 +1,33 @@
+.keyboard {
+  font-family: 'Helvetica Neue';
+  font-weight: bold;
+  margin-top: 150px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.keyboard__row {
+  display: flex;
+}
+
+.keyboard__key {
+  background-color: gray;
+  color: white;
+  height: 70px;
+  min-width: 50px;
+  border-radius: 5px;
+  margin: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyboard__key:hover {
+  cursor: pointer;
+}
+
+.keyboard__key > span {
+  padding: 0 10px;
+}
