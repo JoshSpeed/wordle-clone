@@ -31,3 +31,11 @@
 .keyboard__key > span {
   padding: 0 10px;
 }
+
+#ENTER {
+  width: 90px;
+}
+
+#DELETE {
+  width: 60px;
+}
