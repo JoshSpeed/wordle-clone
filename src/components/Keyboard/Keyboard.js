@@ -15,7 +15,9 @@ import './Keyboard.css'
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined'
 
 function Keyboard() {
-  const { onSelectLetter, onDelete, onEnter } = useContext(AppContext)
+  const { onSelectLetter, onDelete, onEnter, disabledLetters } = useContext(
+    AppContext
+  )
 
   // Watch document for keydowns
   const handleKeyboard = useCallback((event) => {
@@ -42,19 +44,31 @@ function Keyboard() {
     <div className='keyboard' onKeyDown={handleKeyboard}>
       <div className='keyboard__row'>
         {keyRow1.map((key) => (
-          <Key key={key} letter={key} />
+          <Key
+            key={key}
+            letter={key}
+            disabled={disabledLetters.includes(key)}
+          />
         ))}
       </div>
       <div className='keyboard__row'>
         {keyRow2.map((key) => (
-          <Key key={key} letter={key} />
+          <Key
+            key={key}
+            letter={key}
+            disabled={disabledLetters.includes(key)}
+          />
         ))}
       </div>
 
       <div className='keyboard__row'>
         <Key letter={'ENTER'} purpose='ENTER' />
         {keyRow3.map((key) => (
-          <Key key={key} letter={key} />
+          <Key
+            key={key}
+            letter={key}
+            disabled={disabledLetters.includes(key)}
+          />
         ))}
 
         <Key letter={<BackspaceOutlinedIcon />} purpose='DELETE' />

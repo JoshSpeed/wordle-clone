@@ -1,6 +1,6 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 
-import { initialBoardState } from './models/boardDataStore'
+import { initialBoardState, generateWordSet } from './models/boardDataStore'
 
 import Header from './components/Header/Header'
 import Board from './components/Board/Board'
@@ -14,6 +14,16 @@ function App() {
     row: 0,
     letterPos: 0
   })
+  const [wordSet, setWordSet] = useState(new Set())
+  const [disabledLetters, setDisabledLetters] = useState([])
+
+  const correctWord = 'RIGHT'
+
+  useEffect(() => {
+    generateWordSet().then((words) => {
+      setWordSet(words.wordSet)
+    })
+  }, [])
 
   const onSelectLetter = (letter) => {
     const newBoard = [...board]
@@ -26,6 +36,7 @@ function App() {
   }
 
   const onDelete = () => {
+    if (currentAttempt.letterPos === 0) return
     const newBoard = [...board]
     newBoard[currentAttempt.row][currentAttempt.letterPos - 1] = ''
     setBoard(newBoard)
@@ -36,7 +47,22 @@ function App() {
   }
 
   const onEnter = () => {
-    setCurrentAttempt({ row: currentAttempt.row + 1, letterPos: 0 })
+    if (currentAttempt.letterPos < 5) return
+
+    let currentWord = ''
+    for (let i = 0; i < 5; i++) {
+      currentWord += board[currentAttempt.row][i]
+    }
+
+    if (wordSet.has(currentWord.toLowerCase())) {
+      setCurrentAttempt({ row: currentAttempt.row + 1, letterPos: 0 })
+    } else {
+      alert('Word not found')
+    }
+
+    if (currentWord === correctWord) {
+      alert('Game Won')
+    }
   }
 
   return (
@@ -51,7 +77,10 @@ function App() {
           setCurrentAttempt,
           onSelectLetter,
           onEnter,
-          onDelete
+          onDelete,
+          correctWord,
+          setDisabledLetters,
+          disabledLetters
         }}
       >
         <Board />

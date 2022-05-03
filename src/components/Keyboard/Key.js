@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 
 import { AppContext } from '../../App'
 
-function Key({ letter, purpose }) {
+function Key({ letter, purpose, disabled }) {
   const { currentAttempt, onSelectLetter, onEnter, onDelete } = useContext(
     AppContext
   )
@@ -26,7 +26,11 @@ function Key({ letter, purpose }) {
   }
 
   return (
-    <div className='keyboard__key' id={purpose} onClick={selectLetter}>
+    <div
+      className='keyboard__key'
+      id={purpose ? purpose : disabled && 'disabled'}
+      onClick={selectLetter}
+    >
       {letter}
     </div>
   )

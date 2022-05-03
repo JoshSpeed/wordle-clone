@@ -23,3 +23,16 @@
   font-size: 30px;
   color: whitesmoke;
 }
+
+#correct {
+  background-color: #528d4e;
+  border: 1px solid #121212;
+}
+#almost {
+  background-color: rgb(181, 159, 58);
+  border: 1px solid #121212;
+}
+#error {
+  background-color: #3a3a3b;
+  border: 1px solid #121212;
+}
