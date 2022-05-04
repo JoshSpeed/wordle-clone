@@ -5,6 +5,7 @@ import { initialBoardState, generateWordSet } from './models/boardDataStore'
 import Header from './components/Header/Header'
 import Board from './components/Board/Board'
 import Keyboard from './components/Keyboard/Keyboard'
+import EndGame from './components/EndGame/EndGame'
 
 export const AppContext = createContext()
 
@@ -16,12 +17,16 @@ function App() {
   })
   const [wordSet, setWordSet] = useState(new Set())
   const [disabledLetters, setDisabledLetters] = useState([])
-
-  const correctWord = 'RIGHT'
+  const [endGame, setEndGame] = useState({
+    gameOver: false,
+    guessedWord: false
+  })
+  const [correctWord, setCorrectWord] = useState('')
 
   useEffect(() => {
     generateWordSet().then((words) => {
       setWordSet(words.wordSet)
+      setCorrectWord(words.todaysWord.toUpperCase())
     })
   }, [])
 
@@ -61,7 +66,12 @@ function App() {
     }
 
     if (currentWord === correctWord) {
-      alert('Game Won')
+      setEndGame({ gameOver: true, guessedWord: true })
+      return
+    }
+
+    if (currentAttempt.row === 5) {
+      setEndGame({ gameOver: true, guessedWord: false })
     }
   }
 
@@ -80,11 +90,18 @@ function App() {
           onDelete,
           correctWord,
           setDisabledLetters,
-          disabledLetters
+          disabledLetters,
+          endGame,
+          setEndGame
         }}
       >
-        <Board />
-        <Keyboard />
+        {endGame.gameOver ? (
+          <EndGame />
+        ) : (
+          <div>
+            <Board /> <Keyboard />
+          </div>
+        )}
       </AppContext.Provider>
     </div>
   )
