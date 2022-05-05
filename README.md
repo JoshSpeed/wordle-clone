@@ -27,6 +27,6 @@
 
 ## Win Text
 
-<p>If the user guesses the word correctly they will be met with the sreen below. The app will confirm the correct word with thema nd tell them how many guesses it took.</p>
+<p>If the user guesses the word correctly they will be met with the screen below. The app will confirm the correct word with them and tell them how many guesses it took.</p>
 
 ![Win Page](./src/imgs/wordlewin.png)
