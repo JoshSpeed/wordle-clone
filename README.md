@@ -19,7 +19,7 @@
 ## Game Screen
 
 <p>Functionality includes coloured highlighting of correct and incorrect letters. Incorrect letters are mirrored on the keyboard.</p>
-<p>Users can clicked on the keyboard or type directly from their own keyboard. Only real words are allowed as guesses and you cannot use the 'ENTER' key without a full word guess.</p>
+<p>Users can click on the application keyboard to add letters to the board or type directly from their own keyboard. Only real words are allowed as guesses and you cannot use the 'ENTER' key without a full word guess.</p>
 
 ![Home Page](./src/imgs/wordlefront.png)
 
